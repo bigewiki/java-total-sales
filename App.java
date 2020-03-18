@@ -49,6 +49,38 @@ public class App {
                     System.out.print("Would you like to continue? (y/n): ");
                 }
             }
+            // print the table
+            if (!continueRunning) {
+                // some space for our table
+                System.out.print("\n\n");
+                // placeholder for top left cell
+                System.out.format("%15s", "");
+                // print the product "names"
+                for (int i = 0; i < 5; i++) {
+                    System.out.format("%15s", "Product " + i);
+                }
+                // table heading for total and a line break
+                System.out.format("%15s", "Agent Total" + "\n");
+                // vars for storing totals
+                int[] salesAgentTotal = new int[4];
+                int[] productSalesTotal = new int[5];
+                // iterate over our 2d array
+                for (int row = 0; row < salesTable.length; row++) {
+                    System.out.format("%15s", "Sales Agent #" + (row + 1));
+                    for (int col = 0; col < salesTable[row].length; col++) {
+                        System.out.format("%15s", salesTable[row][col]);
+                        salesAgentTotal[row] += salesTable[row][col];
+                        productSalesTotal[col] += salesTable[row][col];
+                    }
+                    System.out.format("%15s", salesAgentTotal[row] + "\n");
+                }
+                System.out.format("%15s", "Product Total");
+                for (int i = 0; i < productSalesTotal.length; i++) {
+                    System.out.format("%15s", productSalesTotal[i]);
+                }
+                // give the table some bottom padding
+                System.out.print("\n\n");
+            }
         }
         input.close();
     }
