@@ -5,7 +5,7 @@ public class App {
         // setup the input
         Scanner input = new Scanner(System.in);
         // initialize our sales table
-        int[][] salesTable = new int[4][5];
+        int[][] salesTable = new int[5][4];
         int salesPerson;
         int productNumber;
         int salesAmount;
@@ -32,7 +32,7 @@ public class App {
                 salesAmount = input.nextInt();
             }
             // set the table amount
-            salesTable[salesPerson - 1][productNumber - 1] += salesAmount;
+            salesTable[productNumber - 1][salesPerson - 1] += salesAmount;
             // probably a smarter way to do this but I need to throw away this input
             input.nextLine().trim().toLowerCase();
             // let the user decide if they would like to continue
@@ -55,28 +55,28 @@ public class App {
                 System.out.print("\n\n");
                 // placeholder for top left cell
                 System.out.format("%15s", "");
-                // print the product "names"
-                for (int i = 0; i < 5; i++) {
-                    System.out.format("%15s", "Product " + i);
+                // print the sales agents
+                for (int i = 1; i < 5; i++) {
+                    System.out.format("%15s", "Sales Agent #" + i);
                 }
                 // table heading for total and a line break
-                System.out.format("%15s", "Agent Total" + "\n");
+                System.out.format("%15s", "Total" + "\n");
                 // vars for storing totals
                 int[] salesAgentTotal = new int[4];
                 int[] productSalesTotal = new int[5];
                 // iterate over our 2d array
                 for (int row = 0; row < salesTable.length; row++) {
-                    System.out.format("%15s", "Sales Agent #" + (row + 1));
+                    System.out.format("%15s", "Product #" + (row + 1));
                     for (int col = 0; col < salesTable[row].length; col++) {
                         System.out.format("%15s", salesTable[row][col]);
-                        salesAgentTotal[row] += salesTable[row][col];
-                        productSalesTotal[col] += salesTable[row][col];
+                        salesAgentTotal[col] += salesTable[row][col];
+                        productSalesTotal[row] += salesTable[row][col];
                     }
-                    System.out.format("%15s", salesAgentTotal[row] + "\n");
+                    System.out.format("%15s", productSalesTotal[row] + "\n");
                 }
-                System.out.format("%15s", "Product Total");
-                for (int i = 0; i < productSalesTotal.length; i++) {
-                    System.out.format("%15s", productSalesTotal[i]);
+                System.out.format("%15s", "Total");
+                for (int i = 0; i < salesAgentTotal.length; i++) {
+                    System.out.format("%15s", salesAgentTotal[i]);
                 }
                 // give the table some bottom padding
                 System.out.print("\n\n");
